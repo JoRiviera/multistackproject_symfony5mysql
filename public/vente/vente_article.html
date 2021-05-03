@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="../css/MiseEnPage.css" rel="stylesheet" />
+    <title>ENI Encheres - Nouvelle vente</title>
+  </head>
+  <body>
+    <!-------------------------------------------------------------- NAVIGATION ------------------------------>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">ENI - ENCHERES</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <!-- LOGGUED IN MENU-->
+            <li class="nav-item">
+              <a class="nav-link" href="/index_logged.html">Enchères</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vente/vente_article.html"
+                >Vendre un article</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profil/profil_logged.html"
+                >Mon profil</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Me déconnecter</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-------------------------------------------------------------- MAIN ------------------------------>
+    <main>
+      <h1>Nouvelle annonce</h1>
+
+      <form
+        action="/vente/ajout"
+        method="POST"
+        id="ajoutArticle"
+        enctype="multipart/form-data"
+      >
+        <!-- Server error feedback -->
+        <p class="alert alert-danger" role="alert">
+          Ceci est un message d'erreur personnalisable.
+        </p>
+
+        <!-- Article -->
+        <div class="flexline">
+          <label for="titre_article" class="form-label">Article</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Ce que vous mettez en vente"
+            id="titre_annonce"
+            name="article"
+            minlength="25"
+            maxlength="120"
+            required
+          />
+        </div>
+        <!-- Catégorie -->
+        <div class="flexline">
+          <label for="categorie_article" class="form-label">Catégorie</label>
+          <select
+            class="form-select"
+            aria-label="Catégorie de votre article"
+            id="categorie_article"
+            name="categorie"
+            required
+          >
+            <option value="" disabled selected hidden>
+              Veuillez choisir la catégorie...
+            </option>
+            <option value="ameublement">Ameublement</option>
+            <option value="art">Art</option>
+            <option value="cuisine">Cuisine</option>
+            <option value="multimedia">Multimédia</option>
+            <option value="jeux_jouets">Jeux et jouets</option>
+            <option value="vetements">Vêtements</option>
+          </select>
+        </div>
+        <!-- Description -->
+        <divclass="flexline">
+          <label for="description_article" class="form-label"
+            >Description</label
+          >
+          <textarea
+            class="form-control"
+            placeholder="Décrivez votre article le plus précisément possible..."
+            rows="5"
+            minlength="150"
+            maxlength="1000"
+            id="description_article"
+            name="description"
+            required
+          ></textarea>
+        </div>
+        <hr>
+        <!-- Photo -->
+        <div class="flexcol">
+          <img
+            class="photo_placeholder_form"
+            src="../img/produit_default.png"
+            alt="image produit par défault, un point d'interrogation"
+          />
+          <div class="flexline">
+            <label for="photo_article" class="form-label"
+              >Importer une photo...</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              accept=".jpg"
+              id="photo_article"
+              name="photo"
+              required
+            />
+          </div>
+        </div>
+        <hr>
+        <!--  Prix -->
+        <div class="flexline">
+          <label for="prix_article" class="form-label">Mise à prix</label>
+          <input
+            type="number"
+            class="form-control"
+            min="1"
+            max="1000000"
+            step="1"
+            id="prix_article"
+            name="prix"
+            required
+          />
+        </div>
+        <!-- Dates Enchères -->
+        <div class="flexcol">
+          <div class="flexline">
+            <label for="debut_encheres" class="form-label"
+              >Début des enchères</label
+            >
+            <input
+              class="form-control"
+              type="date"
+              id="debut_encheres"
+              name="debut_encheres"
+              min="${requestScope.date_debut_min}"
+              max="${requestScope.date_debut_max}"
+              placeholder="${date_debut_default}"
+            />
+          </div>
+          <div class="flexline">
+            <label for="fin_encheres" class="form-label">Fin des enchères</label>
+            <input
+              class="form-control"
+              type="date"
+              id="fin_encheres"
+              name="fin_encheres"
+              min="${requestScope.date_fin_min}"
+              max="${requestScope.date_fin_max}"
+              placeholder="${date_fin_min}"
+            />
+          </div>
+        </div>
+        <!-- Retrait -->
+        <div class="b_dot_black flexcol">
+          <h6>Retrait</h6>
+          <div class="flexcol">
+            <div class="flexline">
+              <label for="retrait_rue" class="form-label">Rue</label>
+              <input
+                class="form-control"
+                type="text"
+                id="retrait_rue"
+                name="retrait_rue"
+                required
+              />
+            </div>
+
+            <div class="flexline">
+              <label for="retrait_cp" class="form-label">Code postal</label>
+              <input
+                class="form-control"
+                type="text"
+                id="retrait_cp"
+                name="retrait_cp"
+                required
+              />
+              <label for="retrait_ville" class="form-label">Ville</label>
+              <input
+                class="form-control"
+                type="text"
+                id="retrait_ville"
+                name="retrait_ville"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <!-- Boutons -->
+        <div class="btn-wrap">
+          <button type="submit" class="btn btn-success" form="ajoutArticle">
+            Mettre mon article en vente
+          </button>
+          <a href="/"
+            ><button type="button" class="btn btn-secondary">Annuler</button></a
+          >
+        </div>
+      </form>
+    </main>
+
+    <!-------------------------------------------------------------- FOOTER ------------------------------>
+
+    <footer>
+      <p>&copy;2021 TrocEnchères | Jo Riviera</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+      integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

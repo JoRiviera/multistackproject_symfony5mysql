@@ -4,6 +4,7 @@ services:
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -11,6 +12,7 @@ services:
 
   adminer:
     image: adminer
+    restart: always
     ports:
       - 1234:8080
 
@@ -30,9 +32,3 @@ services:
       - php
     volumes:
       - ./logs/ngix/:/var/log/nginx:cached
-
-  mailhog:
-    image: mailhog/mailhog:v1.0.0
-    ports:
-      - "1025:1025"
-      - "8025:8025"
