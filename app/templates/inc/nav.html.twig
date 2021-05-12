@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('main_home') }}">ENI - ENCHERES</a>
+        <div class="pointsDisplay" title="Mes Points disponibles">
+            0
+            <span class="material-icons-outlined material-icons"> payments </span>
+        </div>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% if app.user %}
+                    <!-- LOGGUED IN MENU-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index_logged.html">Enchères</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vente/vente_article.html"
+                        >Vendre un article</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profil/profil_logged.html"
+                        >Mon profil</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.html">Me déconnecter</a>
+                    </li>
+                {% else %}
+                    <!-- UNLOGGED MENU -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profil/connexion.html"
+                        >Me connecter / M'inscrire</a
+                        >
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
