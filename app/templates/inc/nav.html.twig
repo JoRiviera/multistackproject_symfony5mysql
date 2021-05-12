@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="{{ path('main_home') }}">ENI - ENCHERES</a>
         <div class="pointsDisplay" title="Mes Points disponibles">
             0
-            <span class="material-icons-outlined material-icons"> payments </span>
+            <span class="material-icons-outlined material-icons" aria-label="points d'achat"> payments </span>
         </div>
         <button
                 class="navbar-toggler"
@@ -21,7 +21,7 @@
                 {% if app.user %}
                     <!-- LOGGUED IN MENU-->
                     <li class="nav-item">
-                        <a class="nav-link" href="/index_logged.html">Enchères</a>
+                        <a class="nav-link" href="{{ path("main_home") }}">Enchères</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/vente/vente_article.html"
@@ -34,12 +34,12 @@
                         >
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/index.html">Me déconnecter</a>
+                        <a class="nav-link" href="{{ path("app_logout") }}">Me déconnecter</a>
                     </li>
                 {% else %}
                     <!-- UNLOGGED MENU -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/profil/connexion.html"
+                        <a class="nav-link" href="{{ path("app_login") }}"
                         >Me connecter / M'inscrire</a
                         >
                     </li>

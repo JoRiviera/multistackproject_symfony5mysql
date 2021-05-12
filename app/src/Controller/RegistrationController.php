@@ -43,6 +43,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Points Initialization (not in form)
+            $user->setPoints(0);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
