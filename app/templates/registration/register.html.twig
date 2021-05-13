@@ -22,29 +22,28 @@
         {% endif %}
 
         <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.pseudo,
-                    { label: 'Pseudo'}) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.email,
-                    { label: 'Email'}) }}</div>
-
+            <div class="flexline m_1em">{{ form_row(registrationForm.pseudo,{
+                    label: 'Pseudo'}) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.email,{
+                    label: 'Email'}) }}</div>
         </div>
          <hr>
         <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.firstName,
-                    { label: 'Prénom' }) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.lastName,
-                    { label: 'Nom' }) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.firstName,{
+                    label: 'Prénom' }) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.lastName,{
+                    label: 'Nom' }) }}</div>
         </div>
         <hr>
-        <div class="flexline m_1em">{{ form_row(registrationForm.telephone,
-                { label: 'Téléphone' }) }}</div>
+        <div class="flexline m_1em">{{ form_row(registrationForm.telephone,{
+                label: 'Téléphone' }) }}</div>
         <hr>
         <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.address,
-                    { label: 'Adresse' }) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.address,{
+                    label: 'Adresse' }) }}</div>
             <div class="flexblock">
-                <div class="flexline m_1em">{{ form_row(registrationForm.postalCode,
-                        { label: 'Code Postal' }) }}</div>
+                <div class="flexline m_1em">{{ form_row(registrationForm.postalCode,{
+                        label: 'Code Postal' }) }}</div>
                 <div class="flexline m_1em">{{ form_row(registrationForm.city, {
                         label: 'Ville'
                     }) }}</div>
@@ -52,10 +51,10 @@
         </div>
         <hr>
         <div class="flexcol flexcenter">
-            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.first,
-                    { label: 'Mot de passe' }) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.second,
-                    { label: 'Confirmez le mot de passe' }) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.first,{
+                    label: 'Mot de passe' }) }}</div>
+            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.second,{
+                    label: 'Confirmez le mot de passe' }) }}</div>
         </div>
 {#        {{ form_row(registrationForm.agreeTerms) }}#}
         <div class="flexline flexspaceeven m_1em">
