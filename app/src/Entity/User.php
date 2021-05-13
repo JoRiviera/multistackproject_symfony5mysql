@@ -21,9 +21,9 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    // @TODO Check if uniqueness of entity is verified on registration
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25, unique=true)
      */
     private $pseudo;
 
