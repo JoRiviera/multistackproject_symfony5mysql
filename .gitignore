@@ -1,0 +1,5 @@
+/.idea
+###> logs ###
+/.docker/logs/
+/var/
+###< logs ###
