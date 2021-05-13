@@ -1,4 +1,8 @@
 /.idea
+###> logs ###
+/.docker/logs
+/var
+###< logs ###
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
