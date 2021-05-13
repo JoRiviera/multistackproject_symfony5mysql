@@ -19,7 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-
+// @TODO Edit authenticator for checking "pseudo" and/or "email" field
 class AppAuthAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
@@ -48,13 +48,13 @@ class AppAuthAuthenticator extends AbstractFormLoginAuthenticator implements Pas
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
+            'identifier' => $request->request->get('identifier'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials['identifier']
         );
 
         return $credentials;
@@ -67,11 +67,17 @@ class AppAuthAuthenticator extends AbstractFormLoginAuthenticator implements Pas
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        // Default implementation with entity fetching with email only
+//        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
+        // Custom implementation to check for email or pseudo sent in login form
+        $user = $this->entityManager->getRepository(User::class)
+            ->findByEmailOrPseudo($credentials['identifier']);
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException(
+                'Nous n\'avons pas trouvé de compte avec l\'identifiant fourni.'
+            );
         }
 
         return $user;
