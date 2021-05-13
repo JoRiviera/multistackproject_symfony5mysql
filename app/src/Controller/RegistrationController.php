@@ -51,6 +51,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
+            // @TODO Translate the email and the landing page
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('system@trocencheres.com', 'Gestion des utilisateurs - TrocEncheres'))

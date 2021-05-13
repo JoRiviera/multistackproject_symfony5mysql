@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription - {{ parent() }}{% endblock %}
+{% block title %}Inscription | {{ parent() }}{% endblock %}
 
 {% block body %}
 
@@ -60,7 +60,7 @@
 {#        {{ form_row(registrationForm.agreeTerms) }}#}
         <div class="flexline flexspaceeven m_1em">
             <button type="submit" class="btn btn-success">Inscription</button>
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Retour</button>
+            {% include('inc/backbutton.html.twig') %}
         </div>
     {{ form_end(registrationForm) }}
 {% endblock %}
