@@ -58,6 +58,7 @@ class Item
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="items")
      */
+    // @TODO Change Cantegory to OneToMany
     private $category;
 
     /**
@@ -70,6 +71,12 @@ class Item
      * @ORM\OneToMany(targetEntity=Bid::class, mappedBy="item")
      */
     private $bids;
+
+    /**
+     * filename, stored in public/uploads/items
+     * @ORM\Column(type="string", length=255)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -228,6 +235,18 @@ class Item
                 $bid->setItem(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
