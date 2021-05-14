@@ -12,54 +12,60 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1 class="display_5">Inscription</h1>
-    {{ form_start(registrationForm) }}
+    {% if app.user %}
+    <div class="m_1em">
+        Vous êtes connecté en tant que <strong>{{ app.user.pseudo }}</strong> (<em>{{ app.user.email }}</em>) | <a href="{{ path('app_logout') }}">Me déconnecter</a>
+    </div>
+    {% else %}
+        <h1 class="display_5">Inscription</h1>
+        {{ form_start(registrationForm) }}
 
-        {% if form_errors(registrationForm) %}
-            <p class="alert alert-danger" role="alert">
-                {{ form_errors(registrationForm) }}
-            </p>
-        {% endif %}
+            {% if form_errors(registrationForm) %}
+                <p class="alert alert-danger" role="alert">
+                    {{ form_errors(registrationForm) }}
+                </p>
+            {% endif %}
 
-        <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.pseudo,{
-                    label: 'Pseudo'}) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.email,{
-                    label: 'Email'}) }}</div>
-        </div>
-         <hr>
-        <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.firstName,{
-                    label: 'Prénom' }) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.lastName,{
-                    label: 'Nom' }) }}</div>
-        </div>
-        <hr>
-        <div class="flexline m_1em">{{ form_row(registrationForm.telephone,{
-                label: 'Téléphone' }) }}</div>
-        <hr>
-        <div class="flexblock">
-            <div class="flexline m_1em">{{ form_row(registrationForm.address,{
-                    label: 'Adresse' }) }}</div>
             <div class="flexblock">
-                <div class="flexline m_1em">{{ form_row(registrationForm.postalCode,{
-                        label: 'Code Postal' }) }}</div>
-                <div class="flexline m_1em">{{ form_row(registrationForm.city, {
-                        label: 'Ville'
-                    }) }}</div>
+                <div class="flexline m_1em">{{ form_row(registrationForm.pseudo,{
+                        label: 'Pseudo'}) }}</div>
+                <div class="flexline m_1em">{{ form_row(registrationForm.email,{
+                        label: 'Email'}) }}</div>
             </div>
-        </div>
-        <hr>
-        <div class="flexcol flexcenter">
-            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.first,{
-                    label: 'Mot de passe' }) }}</div>
-            <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.second,{
-                    label: 'Confirmez le mot de passe' }) }}</div>
-        </div>
-{#        {{ form_row(registrationForm.agreeTerms) }}#}
-        <div class="flexline flexspaceeven m_1em">
-            <button type="submit" class="btn btn-success">Inscription</button>
-            {% include('inc/backbutton.html.twig') %}
-        </div>
-    {{ form_end(registrationForm) }}
+             <hr>
+            <div class="flexblock">
+                <div class="flexline m_1em">{{ form_row(registrationForm.firstName,{
+                        label: 'Prénom' }) }}</div>
+                <div class="flexline m_1em">{{ form_row(registrationForm.lastName,{
+                        label: 'Nom' }) }}</div>
+            </div>
+            <hr>
+            <div class="flexline m_1em">{{ form_row(registrationForm.telephone,{
+                    label: 'Téléphone' }) }}</div>
+            <hr>
+            <div class="flexblock">
+                <div class="flexline m_1em">{{ form_row(registrationForm.address,{
+                        label: 'Adresse' }) }}</div>
+                <div class="flexblock">
+                    <div class="flexline m_1em">{{ form_row(registrationForm.postalCode,{
+                            label: 'Code Postal' }) }}</div>
+                    <div class="flexline m_1em">{{ form_row(registrationForm.city, {
+                            label: 'Ville'
+                        }) }}</div>
+                </div>
+            </div>
+            <hr>
+            <div class="flexcol flexcenter">
+                <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.first,{
+                        label: 'Mot de passe' }) }}</div>
+                <div class="flexline m_1em">{{ form_row(registrationForm.plainPassword.second,{
+                        label: 'Confirmez le mot de passe' }) }}</div>
+            </div>
+    {#        {{ form_row(registrationForm.agreeTerms) }}#}
+            <div class="flexline flexspaceeven m_1em">
+                <button type="submit" class="btn btn-success">Inscription</button>
+                {% include('inc/backbutton.html.twig') %}
+            </div>
+        {{ form_end(registrationForm) }}
+    {% endif %}
 {% endblock %}
