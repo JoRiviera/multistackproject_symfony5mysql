@@ -25,7 +25,7 @@ class Category
     private $label;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="category")
      */
     private $items;
 
@@ -59,22 +59,26 @@ class Category
         return $this->items;
     }
 
-    public function addItem(Item $item): self
+    public function addItem(Item $categoryItem): self
     {
-        if (!$this->items->contains($item)) {
-            $this->items[] = $item;
-            $item->addCategory($this);
+        if (!$this->items->contains($categoryItem)) {
+            $this->items[] = $categoryItem;
+            $categoryItem->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeItem(Item $item): self
+    public function removeItem(Item $categoryItem): self
     {
-        if ($this->items->removeElement($item)) {
-            $item->removeCategory($this);
+        if ($this->items->removeElement($categoryItem)) {
+            // set the owning side to null (unless already changed)
+            if ($categoryItem->getCategory() === $this) {
+                $categoryItem->setCategory(null);
+            }
         }
 
         return $this;
     }
+
 }

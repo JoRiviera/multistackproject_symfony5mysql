@@ -56,12 +56,6 @@ class Item
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="items")
-     */
-    // @TODO Change Cantegory to OneToMany
-    private $category;
-
-    /**
      * @ORM\ManyToOne(targetEntity=PickUpPlace::class, inversedBy="item")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -78,9 +72,14 @@ class Item
      */
     private $picture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="categoryItems")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function __construct()
     {
-        $this->category = new ArrayCollection();
         $this->bids = new ArrayCollection();
     }
 
@@ -173,30 +172,6 @@ class Item
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        $this->category->removeElement($category);
-
-        return $this;
-    }
-
     public function getPickUpPlace(): ?PickUpPlace
     {
         return $this->pickUpPlace;
@@ -247,6 +222,18 @@ class Item
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
